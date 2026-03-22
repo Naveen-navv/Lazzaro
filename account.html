@@ -23,7 +23,7 @@
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation"><span></span><span></span></button>
         <div class="nav-menu" id="nav-menu">
           <div class="nav-links"><a class="nav-link" href="./index.html">Home</a><a class="nav-link" href="./about.html">About Us</a><a class="nav-link" href="./products.html">Product</a></div>
-          <div class="nav-icons" aria-label="Shopping and account"><a href="./cart.html" class="icon-button" aria-label="Cart"><span class="badge">4</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h13l-1.3 7.6a2 2 0 0 1-2 1.7H9a2 2 0 0 1-2-1.7L5.2 4.8A1 1 0 0 0 4.2 4H3" /><path d="M9 20a1 1 0 1 0 0 .01M16 20a1 1 0 1 0 0 .01" /></svg></a><a href="./account.html" class="icon-button" aria-label="Account"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" /><path d="M5 20a7 7 0 0 1 14 0" /></svg></a></div>
+          <div class="nav-icons" aria-label="Shopping and account"><a href="./cart.html" class="icon-button" aria-label="Cart"><span class="badge" data-count="0"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h13l-1.3 7.6a2 2 0 0 1-2 1.7H9a2 2 0 0 1-2-1.7L5.2 4.8A1 1 0 0 0 4.2 4H3" /><path d="M9 20a1 1 0 1 0 0 .01M16 20a1 1 0 1 0 0 .01" /></svg></a><a href="./account.html" class="icon-button" aria-label="Account"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" /><path d="M5 20a7 7 0 0 1 14 0" /></svg></a></div>
         </div>
       </nav>
       <div class="shell account-hero-grid"><div class="account-hero-copy"><h1>My Account</h1></div><div class="account-hero-visual"></div></div>
@@ -58,9 +58,9 @@
                   <tr><th>Order ID</th><th>Qty</th><th>Price</th><th>Date</th><th>Status</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td>Lazzaro8943</td><td>2</td><td>?5,172</td><td>Oct 10 2024</td><td>Delivered</td></tr>
-                  <tr><td>Lazzaro9574</td><td>1</td><td>?772</td><td>Oct 10 2024</td><td>Dispatched</td></tr>
-                  <tr><td>Lazzaro10075</td><td>1</td><td>?3,522</td><td>Oct 14 2024</td><td>Confirmed</td></tr>
+                  <tr><td>Lazzaro8943</td><td>2</td><td>₹5,172</td><td>Oct 10 2024</td><td>Delivered</td></tr>
+                  <tr><td>Lazzaro9574</td><td>1</td><td>₹772</td><td>Oct 10 2024</td><td>Dispatched</td></tr>
+                  <tr><td>Lazzaro10075</td><td>1</td><td>₹3,522</td><td>Oct 14 2024</td><td>Confirmed</td></tr>
                 </tbody>
               </table>
             </div>
@@ -89,7 +89,25 @@
                 <button type="button">Edit</button>
               </article>
             </div>
-            <button class="detail-secondary add-address-btn" type="button">Add New Address <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg></button>
+            <button class="detail-secondary add-address-btn" type="button" data-address-action="add">Add New Address <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" /></svg></button>
+
+            <div class="address-form-wrap" id="address-form" style="display:none;">
+              <h3 class="address-form-title">Add New Address</h3>
+              <div class="account-form-grid two-col">
+                <label><span>Full Name*</span><input type="text" placeholder="Full Name" id="addr-name" /></label>
+                <label><span>Phone*</span><input type="text" placeholder="Phone Number" id="addr-phone" /></label>
+                <label class="full-width"><span>Address Line 1*</span><input type="text" placeholder="Street address, P.O. Box" id="addr-line1" /></label>
+                <label class="full-width"><span>Address Line 2</span><input type="text" placeholder="Apartment, suite, unit, etc." id="addr-line2" /></label>
+                <label><span>City*</span><input type="text" placeholder="City" id="addr-city" /></label>
+                <label><span>Pincode*</span><input type="text" placeholder="Pincode" id="addr-pincode" /></label>
+                <label><span>State*</span><input type="text" placeholder="State" id="addr-state" /></label>
+                <label><span>Country*</span><input type="text" placeholder="Country" value="India" id="addr-country" /></label>
+              </div>
+              <div class="address-form-actions">
+                <button class="button-dark" type="button" id="addr-save">Save Address</button>
+                <button class="button-light" type="button" id="addr-cancel">Cancel</button>
+              </div>
+            </div>
           </section>
         </div>
       </section>

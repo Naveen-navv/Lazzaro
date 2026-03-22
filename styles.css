@@ -160,7 +160,7 @@ svg {
   position: absolute;
   top: -2px;
   right: 0;
-  display: grid;
+  display: none;
   place-items: center;
   width: 18px;
   height: 18px;
@@ -169,6 +169,14 @@ svg {
   color: #171717;
   font-size: 0.7rem;
   font-weight: 600;
+}
+
+.badge::after {
+  content: attr(data-count);
+}
+
+.badge:not([data-count="0"]) {
+  display: grid;
 }
 
 .nav-toggle {
@@ -246,7 +254,7 @@ svg {
   gap: 2rem;
   min-height: 100svh;
   align-items: center;
-  padding-top: 132px;
+  padding-top: 60px;
 }
 
 .hero-grid-right {
@@ -335,7 +343,6 @@ svg {
 }
 
 .hero-copy h1,
-.showcase-content h2,
 .stats-copy h2 {
   margin: 0;
   font-size: clamp(4rem, 7.5vw, 6.5rem);
@@ -505,8 +512,7 @@ svg {
 }
 
 .display-title span,
-.section-heading span,
-.showcase-content h2 span {
+.section-heading span {
   font-family: "Cormorant Garamond", serif;
   font-style: italic;
   font-weight: 500;
@@ -699,43 +705,76 @@ svg {
   color: #fff;
 }
 
-.showcase {
-  display: grid;
-  grid-template-columns: 1.35fr 0.65fr;
-  gap: 1.5rem;
-  align-items: end;
-}
-
-.showcase-image {
+.showcase-wrapper {
+  position: relative;
   overflow: hidden;
-  border-radius: 30px;
-  box-shadow: var(--shadow-soft);
-}
-
-.showcase-image img {
   width: 100%;
-  height: 100%;
+}
+
+.showcase-slider {
+  display: flex;
+  transition: transform 0.6s ease;
+  width: 100%;
+}
+
+.showcase-slide {
+  min-width: 100%;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.showcase-slide img {
+  width: 100%;
+  height: 560px;
   object-fit: cover;
+  display: block;
 }
 
-.showcase-content {
-  display: grid;
-  gap: 1rem;
-  padding-bottom: 1rem;
+.showcase-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 3rem;
+  padding-right: 8rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);
 }
 
-.showcase-content p {
+.showcase-overlay .eyebrow {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+
+.showcase-overlay h2 {
+  color: #fff;
   margin: 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+}
+
+.showcase-overlay h2 span {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.showcase-overlay p {
+  margin: 0.5rem 0 0;
   max-width: 26rem;
   font-size: 1.1rem;
   line-height: 1.7;
-  color: var(--muted);
+  color: rgba(255,255,255,0.8);
 }
 
-.showcase-actions {
+.showcase-nav {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 2rem;
   display: flex;
   gap: 0.85rem;
-  margin-top: 1rem;
+  z-index: 2;
 }
 
 .stats {
@@ -944,7 +983,6 @@ svg {
   }
 
   .feature-section,
-  .showcase,
   .stats,
   .footer-grid {
     grid-template-columns: 1fr;
@@ -960,9 +998,10 @@ svg {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .showcase-content {
-    padding-top: 1rem;
+  .showcase-slide img {
+    height: 400px;
   }
+
 }
 
 @media (max-width: 780px) {
@@ -1053,6 +1092,10 @@ svg {
   .product-grid,
   .collection-grid {
     grid-template-columns: 1fr;
+  }
+
+  .showcase-slide img {
+    height: 300px;
   }
 
   .feature-summary h3,
@@ -1315,7 +1358,7 @@ svg {
   display: grid;
   grid-template-columns: minmax(320px, 1fr) minmax(320px, 0.95fr);
   gap: 3rem;
-  align-items: center;
+  align-items: start;
   padding-block: 2rem 5rem;
 }
 
@@ -1351,12 +1394,15 @@ svg {
 }
 
 .faq-panel {
-  display: none;
-  padding: 0 0 1.5rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0;
 }
 
 .faq-item.is-open .faq-panel {
-  display: block;
+  max-height: 300px;
+  padding: 0 0 1.5rem;
 }
 
 .faq-panel p {
@@ -1927,7 +1973,6 @@ svg {
 }
 
 .checkout-form-grid.three-col {
-  grid-template-columns: 0.8fr 0.8fr 1.25fr;
   margin-top: 1.4rem;
 }
 
@@ -2166,6 +2211,29 @@ svg {
   margin-top: 1rem;
   width: 100%;
   justify-content: center;
+}
+
+.address-form-wrap {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(25, 25, 25, 0.12);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.address-form-wrap h3 {
+  margin: 0 0 1.2rem;
+  font-size: 1.15rem;
+}
+
+.address-form-wrap .full-width {
+  grid-column: 1 / -1;
+}
+
+.address-form-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.2rem;
 }
 
 .policy-hero {
