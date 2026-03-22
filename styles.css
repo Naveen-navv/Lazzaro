@@ -2281,6 +2281,7 @@ svg {
   inset: 0;
   z-index: 80;
   display: none;
+  overflow-y: auto;
 }
 
 .auth-modal.is-open {
@@ -2297,15 +2298,15 @@ svg {
 .auth-dialog {
   position: relative;
   z-index: 1;
-  overflow: hidden;
   width: min(1260px, calc(100vw - 120px));
   max-height: min(760px, calc(100vh - 48px));
   margin: 24px auto;
   display: grid;
   grid-template-columns: minmax(280px, 0.78fr) minmax(360px, 0.92fr);
   background: rgba(255, 251, 245, 0.98);
-  overflow: hidden;
+  border-radius: 28px;
   box-shadow: 0 40px 90px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
 }
 
 .auth-close {
@@ -2351,7 +2352,6 @@ svg {
   background:
     radial-gradient(circle at 60% 16%, rgba(255,255,255,0.85), transparent 24%),
     linear-gradient(180deg, rgba(255,255,255,0.92), rgba(251,248,243,0.95));
-  overflow-y: auto;
 }
 
 .auth-view {
@@ -2445,6 +2445,43 @@ svg {
   text-align: center;
   color: #6b6b6b;
   font-size: 1.05rem;
+}
+
+.auth-form-signup {
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.auth-form-signup .auth-grid-two {
+  gap: 0.75rem;
+}
+
+.auth-form-signup label {
+  gap: 0.2rem;
+}
+
+.auth-form-signup label span {
+  font-size: 0.8rem;
+}
+
+.auth-form-signup input {
+  height: 36px;
+  font-size: 0.9rem;
+}
+
+.auth-form-signup .auth-submit {
+  min-height: 42px;
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+}
+
+.auth-view[data-auth-view="signup"] h2 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.auth-view[data-auth-view="signup"] .auth-footer-copy {
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
 }
 
 body.auth-open {

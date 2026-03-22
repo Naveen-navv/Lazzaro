@@ -3,7 +3,13 @@
     "allow": [
       "Bash(pip install:*)",
       "Bash(python -c \":*)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(grep -roh 'assets/[^\"\"\"\"''''\\)\\\\s]*' C:/Users/acer/Kedil/lazzarro/*.html C:/Users/acer/Kedil/lazzarro/*.css)",
+      "Bash(grep -roh \"url\\([''''\"\"]?./assets/[^''''\"\"\\)]*[''''\"\"]?\\)\" C:/Users/acer/Kedil/lazzarro/*.css)",
+      "Bash(grep -l 'policy-hero-clean' C:/Users/acer/Kedil/lazzarro/*.css C:/Users/acer/Kedil/lazzarro/*.html)",
+      "Bash(xargs grep:*)",
+      "Bash(find C:/Users/acer/.claude/projects -name *.json)",
+      "Bash(find C:/Users/acer/.claude -name settings*.json -o -name hooks*.json)"
     ]
   }
 }
