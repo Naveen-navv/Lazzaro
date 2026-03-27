@@ -217,6 +217,19 @@ document.querySelectorAll('.address-card button').forEach((btn) => {
   });
 });
 
+document.querySelectorAll('.password-toggle').forEach((toggle) => {
+  toggle.addEventListener('click', () => {
+    const wrap = toggle.closest('.auth-input-wrap');
+    const input = wrap ? wrap.querySelector('input') : null;
+    if (!input) return;
+
+    const makeVisible = input.type === 'password';
+    input.type = makeVisible ? 'text' : 'password';
+    toggle.classList.toggle('is-visible', makeVisible);
+    toggle.setAttribute('aria-label', makeVisible ? 'Hide password' : 'Show password');
+  });
+});
+
 if (addrCancel) {
   addrCancel.addEventListener('click', hideAddressForm);
 }
@@ -292,6 +305,28 @@ if (loadMoreBtn) {
     shown = next;
     if (shown >= allCards.length) {
       loadMoreBtn.style.display = 'none';
+    }
+  });
+}
+
+const reviewLoadMoreBtn = document.querySelector('.review-loadmore');
+if (reviewLoadMoreBtn) {
+  const hiddenReviewCards = Array.from(document.querySelectorAll('.review-card-hidden'));
+  const reviewBatchSize = 2;
+  let revealedReviews = 0;
+
+  if (hiddenReviewCards.length === 0) {
+    reviewLoadMoreBtn.style.display = 'none';
+  }
+
+  reviewLoadMoreBtn.addEventListener('click', () => {
+    const next = Math.min(revealedReviews + reviewBatchSize, hiddenReviewCards.length);
+    for (let i = revealedReviews; i < next; i++) {
+      hiddenReviewCards[i].style.display = 'block';
+    }
+    revealedReviews = next;
+    if (revealedReviews >= hiddenReviewCards.length) {
+      reviewLoadMoreBtn.style.display = 'none';
     }
   });
 }

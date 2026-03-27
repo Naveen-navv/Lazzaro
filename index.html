@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 
-<body>
+<body class="home-page">
   <header class="hero" id="home">
     <nav class="nav shell">
       <a class="brand" href="#home" aria-label="Lazzaro home">
@@ -178,6 +178,18 @@
           </svg>
         </button>
       </div>
+      <div class="feature-nav" aria-label="Feature navigation">
+        <button class="slider-control feature-nav-prev" type="button" aria-label="Previous feature">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14 6 8 12l6 6" />
+          </svg>
+        </button>
+        <button class="slider-control feature-nav-next" type="button" aria-label="Next feature">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m10 6 6 6-6 6" />
+          </svg>
+        </button>
+      </div>
 
     </section>
 
@@ -245,48 +257,46 @@
       </div>
     </section>
 
-    <section class="showcase-wrapper" id="showcase-wrapper">
-      <div class="showcase-slider" id="showcase-slider">
-        <div class="showcase-slide">
-          <img src="./assets/hero-sofia-clean.png" alt="Lazzaro Sofia Belle perfume bottle" />
-          <div class="showcase-overlay">
-            <div>
-              <p class="eyebrow">Featured Blend</p>
-              <h2>Elanor x <span>Sofia Belle</span></h2>
-              <p>
-                A soft floral composition framed by warm stone, green leaves, and a
-                polished amber core.
-              </p>
+      <section class="showcase-wrapper" id="showcase-wrapper">
+        <div class="showcase-slider" id="showcase-slider">
+          <div class="showcase-slide" data-showcase-index="1">
+            <img src="./assets/hero-slider-2.png" alt="Lazzaro Elanor Ember perfume" />
+            <div class="showcase-bottom-band">
+              <div class="showcase-side showcase-side-left">
+                <h2>Elanor x</h2>
+              </div>
+              <div class="showcase-side showcase-side-right">
+                <h2><span>Sofia Belle</span></h2>
+              </div>
+            </div>
+          </div>
+          <div class="showcase-slide" data-showcase-index="2">
+            <img src="./assets/hero-sofia-clean.png" alt="Lazzaro Sofia Belle perfume bottle" />
+            <div class="showcase-bottom-band">
+              <div class="showcase-side showcase-side-left">
+                <h2>Elanor</h2>
+              </div>
+              <div class="showcase-side showcase-side-right">
+                <h2><span>Ember</span></h2>
+              </div>
             </div>
           </div>
         </div>
-        <div class="showcase-slide">
-          <img src="./assets/hero-slider-2.png" alt="Lazzaro Elanor Ember perfume" />
-          <div class="showcase-overlay">
-            <div>
-              <p class="eyebrow">Signature Scent</p>
-              <h2>Elanor <span>Ember</span></h2>
-              <p>
-                Rich amber notes layered with deep patchouli and warm tonka bean
-                for an unforgettable trail.
-              </p>
-            </div>
+        <div class="showcase-center-controls">
+          <div class="showcase-nav">
+          <button class="slider-control showcase-prev" type="button" aria-label="Previous slide">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 6 8 12l6 6" />
+            </svg>
+          </button>
+          <button class="slider-control showcase-next" type="button" aria-label="Next slide">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m10 6 6 6-6 6" />
+            </svg>
+          </button>
           </div>
         </div>
-      </div>
-      <div class="showcase-nav">
-        <button class="slider-control showcase-prev" type="button" aria-label="Previous slide">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M14 6 8 12l6 6" />
-          </svg>
-        </button>
-        <button class="slider-control showcase-next" type="button" aria-label="Next slide">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="m10 6 6 6-6 6" />
-          </svg>
-        </button>
-      </div>
-    </section>
+      </section>
 
     <section class="stats shell">
       <div class="stats-copy">
@@ -493,7 +503,7 @@
           <p>Sign in to your account to continue.</p>
           <form class="auth-form">
             <label><span>Email-ID</span><input type="email" placeholder="Email-ID" /></label>
-            <label><span>Password</span><input type="password" placeholder="Password" /></label>
+            <label><span>Password</span><span class="auth-input-wrap"><input type="password" placeholder="Password" /><button class="password-toggle" type="button" aria-label="Show password"><svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" /><circle cx="12" cy="12" r="3" /></svg><svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3 21 21" /><path d="M10.6 10.7A3 3 0 0 0 13.3 13.4" /><path d="M9.9 5.1A12.5 12.5 0 0 1 12 5c6.5 0 10 7 10 7a17.6 17.6 0 0 1-4.2 4.8" /><path d="M6.7 6.7A17.1 17.1 0 0 0 2 12s3.5 7 10 7a11.9 11.9 0 0 0 4-.7" /></svg></button></span></label>
             <a href="#" class="auth-inline-link auth-align-right" data-auth-switch="forgot">Forgot Password?</a>
             <button class="auth-submit" type="button">Sign In <span>&rarr;</span></button>
           </form>
@@ -509,8 +519,8 @@
             </div>
             <label><span>Email-ID*</span><input type="email" placeholder="Email-ID" /></label>
             <label><span>Mobile Number*</span><input type="text" placeholder="Mobile Number" /></label>
-            <label><span>Password*</span><input type="password" placeholder="Password" /></label>
-            <label><span>Confirm Password*</span><input type="password" placeholder="Confirm Password" /></label>
+            <label><span>Password*</span><span class="auth-input-wrap"><input type="password" placeholder="Password" /><button class="password-toggle" type="button" aria-label="Show password"><svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" /><circle cx="12" cy="12" r="3" /></svg><svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3 21 21" /><path d="M10.6 10.7A3 3 0 0 0 13.3 13.4" /><path d="M9.9 5.1A12.5 12.5 0 0 1 12 5c6.5 0 10 7 10 7a17.6 17.6 0 0 1-4.2 4.8" /><path d="M6.7 6.7A17.1 17.1 0 0 0 2 12s3.5 7 10 7a11.9 11.9 0 0 0 4-.7" /></svg></button></span></label>
+            <label><span>Confirm Password*</span><span class="auth-input-wrap"><input type="password" placeholder="Confirm Password" /><button class="password-toggle" type="button" aria-label="Show password"><svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" /><circle cx="12" cy="12" r="3" /></svg><svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3 21 21" /><path d="M10.6 10.7A3 3 0 0 0 13.3 13.4" /><path d="M9.9 5.1A12.5 12.5 0 0 1 12 5c6.5 0 10 7 10 7a17.6 17.6 0 0 1-4.2 4.8" /><path d="M6.7 6.7A17.1 17.1 0 0 0 2 12s3.5 7 10 7a11.9 11.9 0 0 0 4-.7" /></svg></button></span></label>
             <button class="auth-submit" type="button">Sign Up <span>&rarr;</span></button>
           </form>
           <p class="auth-footer-copy">Already have an account? <a href="#" data-auth-switch="signin">Sign IN</a></p>
