@@ -2839,9 +2839,21 @@ vertical-align: middle;
   position: relative;
   min-height: 0;
   padding: 2rem 2rem 1.4rem;
-  background:
-    radial-gradient(circle at 60% 16%, rgba(255, 255, 255, 0.85), transparent 24%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(251, 248, 243, 0.95));
+  overflow: hidden;
+  background: url('./assets/Sign_Up-Popup_bg.png') center/cover no-repeat;
+}
+
+.auth-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(251, 248, 243, 0.34));
+  pointer-events: none;
+}
+
+.auth-panel > * {
+  position: relative;
+  z-index: 1;
 }
 
 .auth-view {
