@@ -146,6 +146,109 @@ detailTabs.forEach((tab) => {
   });
 });
 
+const checkoutBillingForm = document.querySelector('#checkout-billing-form');
+const checkoutBillingModeRadios = Array.from(document.querySelectorAll('input[name="billing_address_mode"]'));
+if (checkoutBillingForm && checkoutBillingModeRadios.length) {
+  function syncCheckoutBilling() {
+    const selected = checkoutBillingModeRadios.find((r) => r.checked);
+    const same = !selected || selected.value === 'same';
+    checkoutBillingForm.hidden = same;
+    checkoutBillingForm.setAttribute('aria-hidden', same ? 'true' : 'false');
+    checkoutBillingForm.querySelectorAll('input, select, textarea, button').forEach((el) => {
+      el.disabled = same;
+    });
+  }
+  checkoutBillingModeRadios.forEach((radio) => {
+    radio.addEventListener('change', syncCheckoutBilling);
+  });
+  syncCheckoutBilling();
+}
+
+const aboutAccordionLayout = document.querySelector('.about-overview-layout');
+if (aboutAccordionLayout) {
+  const aboutMain = aboutAccordionLayout.querySelector(':scope > .about-feature-main');
+  const aboutSide2 = aboutAccordionLayout.querySelector(':scope > article:nth-child(2)');
+  const aboutSide3 = aboutAccordionLayout.querySelector(':scope > article:nth-child(3)');
+  const CLS_2 = 'is-accordion-side-2';
+  const CLS_3 = 'is-accordion-side-3';
+  const leaveDelayMs = 260;
+  let leaveTimer;
+
+  function cancelAccordionLeave() {
+    window.clearTimeout(leaveTimer);
+    leaveTimer = undefined;
+  }
+
+  function clearAccordionHover() {
+    aboutAccordionLayout.classList.remove(CLS_2, CLS_3);
+  }
+
+  function scheduleAccordionLeave() {
+    cancelAccordionLeave();
+    leaveTimer = window.setTimeout(() => {
+      clearAccordionHover();
+      leaveTimer = undefined;
+    }, leaveDelayMs);
+  }
+
+  function accordionLeaveIfOutside(e) {
+    const next = e.relatedTarget;
+    if (next && aboutAccordionLayout.contains(next)) return;
+    scheduleAccordionLeave();
+  }
+
+  if (aboutMain) {
+    aboutMain.addEventListener('mouseenter', () => {
+      cancelAccordionLeave();
+      clearAccordionHover();
+    });
+    aboutMain.addEventListener('mouseleave', accordionLeaveIfOutside);
+  }
+  if (aboutSide2) {
+    aboutSide2.addEventListener('mouseenter', () => {
+      cancelAccordionLeave();
+      aboutAccordionLayout.classList.remove(CLS_3);
+      aboutAccordionLayout.classList.add(CLS_2);
+    });
+    aboutSide2.addEventListener('mouseleave', accordionLeaveIfOutside);
+  }
+  if (aboutSide3) {
+    aboutSide3.addEventListener('mouseenter', () => {
+      cancelAccordionLeave();
+      aboutAccordionLayout.classList.remove(CLS_2);
+      aboutAccordionLayout.classList.add(CLS_3);
+    });
+    aboutSide3.addEventListener('mouseleave', accordionLeaveIfOutside);
+  }
+
+  aboutAccordionLayout.addEventListener('focusin', (e) => {
+    const t = e.target;
+    if (!aboutAccordionLayout.contains(t)) return;
+    if (aboutMain && (t === aboutMain || aboutMain.contains(t))) {
+      cancelAccordionLeave();
+      clearAccordionHover();
+      return;
+    }
+    if (aboutSide2 && (t === aboutSide2 || aboutSide2.contains(t))) {
+      cancelAccordionLeave();
+      aboutAccordionLayout.classList.remove(CLS_3);
+      aboutAccordionLayout.classList.add(CLS_2);
+      return;
+    }
+    if (aboutSide3 && (t === aboutSide3 || aboutSide3.contains(t))) {
+      cancelAccordionLeave();
+      aboutAccordionLayout.classList.remove(CLS_2);
+      aboutAccordionLayout.classList.add(CLS_3);
+    }
+  });
+
+  aboutAccordionLayout.addEventListener('focusout', (e) => {
+    const next = e.relatedTarget;
+    if (next && aboutAccordionLayout.contains(next)) return;
+    cancelAccordionLeave();
+    clearAccordionHover();
+  });
+}
 
 const accountNavButtons = Array.from(document.querySelectorAll('.account-nav-btn'));
 const accountPanels = Array.from(document.querySelectorAll('.account-panel'));
@@ -183,6 +286,10 @@ function hideAddressForm() {
     if (input.id === 'addr-country') { input.value = 'India'; return; }
     input.value = '';
   });
+  const stateSelect = addressForm.querySelector('#addr-state');
+  if (stateSelect && stateSelect.tagName === 'SELECT') {
+    stateSelect.value = 'Tamil Nadu';
+  }
 }
 
 if (addAddressBtn) {
@@ -305,28 +412,6 @@ if (loadMoreBtn) {
     shown = next;
     if (shown >= allCards.length) {
       loadMoreBtn.style.display = 'none';
-    }
-  });
-}
-
-const reviewLoadMoreBtn = document.querySelector('.review-loadmore');
-if (reviewLoadMoreBtn) {
-  const hiddenReviewCards = Array.from(document.querySelectorAll('.review-card-hidden'));
-  const reviewBatchSize = 2;
-  let revealedReviews = 0;
-
-  if (hiddenReviewCards.length === 0) {
-    reviewLoadMoreBtn.style.display = 'none';
-  }
-
-  reviewLoadMoreBtn.addEventListener('click', () => {
-    const next = Math.min(revealedReviews + reviewBatchSize, hiddenReviewCards.length);
-    for (let i = revealedReviews; i < next; i++) {
-      hiddenReviewCards[i].style.display = 'block';
-    }
-    revealedReviews = next;
-    if (revealedReviews >= hiddenReviewCards.length) {
-      reviewLoadMoreBtn.style.display = 'none';
     }
   });
 }
