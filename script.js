@@ -232,6 +232,7 @@ if (aboutAccordionLayout) {
   const CLS_3 = 'is-accordion-side-3';
   const leaveDelayMs = 260;
   let leaveTimer;
+  let hoverCol = null;
 
   function cancelAccordionLeave() {
     window.clearTimeout(leaveTimer);
@@ -240,6 +241,7 @@ if (aboutAccordionLayout) {
 
   function clearAccordionHover() {
     aboutAccordionLayout.classList.remove(CLS_2, CLS_3);
+    hoverCol = null;
   }
 
   function scheduleAccordionLeave() {
@@ -250,54 +252,87 @@ if (aboutAccordionLayout) {
     }, leaveDelayMs);
   }
 
-  function accordionLeaveIfOutside(e) {
-    const next = e.relatedTarget;
-    if (next && aboutAccordionLayout.contains(next)) return;
-    scheduleAccordionLeave();
+  function panelHitByPoint(clientX, clientY) {
+    const stack = document.elementsFromPoint(clientX, clientY);
+    let hitMain = false;
+    let hit2 = false;
+    let hit3 = false;
+    for (let i = 0; i < stack.length; i++) {
+      const el = stack[i];
+      if (!(el instanceof Element)) continue;
+      if (aboutMain && (el === aboutMain || aboutMain.contains(el))) hitMain = true;
+      if (aboutSide2 && (el === aboutSide2 || aboutSide2.contains(el))) hit2 = true;
+      if (aboutSide3 && (el === aboutSide3 || aboutSide3.contains(el))) hit3 = true;
+    }
+    if (hitMain) return 'main';
+    /* When columns overlap during flex transitions, prefer the left strip (2) over (3). */
+    if (hit2 && hit3) return '2';
+    if (hit2) return '2';
+    if (hit3) return '3';
+    return null;
   }
 
-  if (aboutMain) {
-    aboutMain.addEventListener('mouseenter', () => {
-      cancelAccordionLeave();
-      clearAccordionHover();
-    });
-    aboutMain.addEventListener('mouseleave', accordionLeaveIfOutside);
-  }
-  if (aboutSide2) {
-    aboutSide2.addEventListener('mouseenter', () => {
-      cancelAccordionLeave();
+  function applyAccordionHoverCol(col) {
+    cancelAccordionLeave();
+    if (col == null) {
+      scheduleAccordionLeave();
+      return;
+    }
+    if (col === hoverCol) return;
+
+    hoverCol = col;
+    if (col === 'main') {
+      aboutAccordionLayout.classList.remove(CLS_2, CLS_3);
+      return;
+    }
+    if (col === '2') {
       aboutAccordionLayout.classList.remove(CLS_3);
       aboutAccordionLayout.classList.add(CLS_2);
-    });
-    aboutSide2.addEventListener('mouseleave', accordionLeaveIfOutside);
-  }
-  if (aboutSide3) {
-    aboutSide3.addEventListener('mouseenter', () => {
-      cancelAccordionLeave();
+      return;
+    }
+    if (col === '3') {
       aboutAccordionLayout.classList.remove(CLS_2);
       aboutAccordionLayout.classList.add(CLS_3);
-    });
-    aboutSide3.addEventListener('mouseleave', accordionLeaveIfOutside);
+    }
   }
+
+  aboutAccordionLayout.addEventListener(
+    'pointermove',
+    (e) => {
+      if (e.pointerType !== 'mouse') return;
+      applyAccordionHoverCol(panelHitByPoint(e.clientX, e.clientY));
+    },
+    { passive: true }
+  );
+
+  aboutAccordionLayout.addEventListener('pointerleave', (e) => {
+    if (e.pointerType !== 'mouse') return;
+    const next = e.relatedTarget;
+    if (next instanceof Node && aboutAccordionLayout.contains(next)) return;
+    scheduleAccordionLeave();
+  });
 
   aboutAccordionLayout.addEventListener('focusin', (e) => {
     const t = e.target;
     if (!aboutAccordionLayout.contains(t)) return;
     if (aboutMain && (t === aboutMain || aboutMain.contains(t))) {
       cancelAccordionLeave();
-      clearAccordionHover();
+      aboutAccordionLayout.classList.remove(CLS_2, CLS_3);
+      hoverCol = 'main';
       return;
     }
     if (aboutSide2 && (t === aboutSide2 || aboutSide2.contains(t))) {
       cancelAccordionLeave();
       aboutAccordionLayout.classList.remove(CLS_3);
       aboutAccordionLayout.classList.add(CLS_2);
+      hoverCol = '2';
       return;
     }
     if (aboutSide3 && (t === aboutSide3 || aboutSide3.contains(t))) {
       cancelAccordionLeave();
       aboutAccordionLayout.classList.remove(CLS_2);
       aboutAccordionLayout.classList.add(CLS_3);
+      hoverCol = '3';
     }
   });
 
@@ -555,3 +590,30 @@ if (authModal) {
     }
   });
 }
+
+(function initScrollReveal() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  document.querySelectorAll('.product-grid, .collection-grid, .catalog-grid').forEach((grid) => {
+    const cards = [...grid.children].filter((c) => c.classList.contains('scroll-reveal--stagger'));
+    cards.forEach((card, i) => {
+      card.style.setProperty('--reveal-i', String(i));
+    });
+  });
+
+  const nodes = document.querySelectorAll('.scroll-reveal');
+  if (!nodes.length) return;
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-revealed');
+        io.unobserve(entry.target);
+      });
+    },
+    { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.06 }
+  );
+
+  nodes.forEach((el) => io.observe(el));
+})();

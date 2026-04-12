@@ -22,6 +22,25 @@
   box-sizing: border-box;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(1.35rem);
+    transition:
+      opacity 1.15s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .scroll-reveal.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-reveal.scroll-reveal--stagger {
+    transition-delay: calc(var(--reveal-i, 0) * 0.14s), calc(var(--reveal-i, 0) * 0.14s);
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -1533,6 +1552,8 @@ vertical-align: middle;
 }
 
 .about-overview-layout > .about-feature-main {
+  position: relative;
+  z-index: 2;
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 0%;
@@ -1541,17 +1562,46 @@ vertical-align: middle;
 }
 
 .about-overview-layout > .about-side-card {
+  position: relative;
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: var(--about-accordion-narrow);
   min-width: var(--about-accordion-narrow);
   max-width: var(--about-accordion-narrow);
+}
+
+/* Middle strip stacks above the right strip so subpixel overlap during flex
+   transitions does not send hovers to column 3 when aiming at column 2. */
+.about-overview-layout > .about-feature-main + .about-side-card {
+  z-index: 3;
+}
+
+.about-overview-layout > .about-feature-main + .about-side-card + .about-side-card {
+  z-index: 1;
+}
+
+.about-overview-layout.is-accordion-side-2 > .about-feature-main {
+  z-index: 1;
+}
+
+.about-overview-layout.is-accordion-side-2 > .about-feature-main + .about-side-card {
+  z-index: 4;
+}
+
+.about-overview-layout.is-accordion-side-3 > .about-feature-main {
+  z-index: 1;
+}
+
+.about-overview-layout.is-accordion-side-3 > .about-feature-main + .about-side-card {
+  z-index: 1;
+}
+
+.about-overview-layout.is-accordion-side-3 > .about-feature-main + .about-side-card + .about-side-card {
+  z-index: 4;
 }
 
 .about-overview-layout.is-accordion-side-2 > .about-feature-main,
-.about-overview-layout:has(> .about-feature-main + .about-side-card:focus-within) > .about-feature-main,
-.about-overview-layout.is-accordion-side-3 > .about-feature-main,
-.about-overview-layout:has(> .about-feature-main + .about-side-card + .about-side-card:focus-within) > .about-feature-main {
+.about-overview-layout.is-accordion-side-3 > .about-feature-main {
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: var(--about-accordion-narrow);
@@ -1559,8 +1609,7 @@ vertical-align: middle;
   max-width: var(--about-accordion-narrow);
 }
 
-.about-overview-layout.is-accordion-side-2 > .about-feature-main + .about-side-card,
-.about-overview-layout:has(> .about-feature-main + .about-side-card:focus-within) > .about-feature-main + .about-side-card {
+.about-overview-layout.is-accordion-side-2 > .about-feature-main + .about-side-card {
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 0%;
@@ -1568,8 +1617,7 @@ vertical-align: middle;
   max-width: none;
 }
 
-.about-overview-layout.is-accordion-side-3 > .about-feature-main + .about-side-card,
-.about-overview-layout:has(> .about-feature-main + .about-side-card + .about-side-card:focus-within) > .about-feature-main + .about-side-card {
+.about-overview-layout.is-accordion-side-3 > .about-feature-main + .about-side-card {
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: var(--about-accordion-narrow);
@@ -1577,8 +1625,7 @@ vertical-align: middle;
   max-width: var(--about-accordion-narrow);
 }
 
-.about-overview-layout.is-accordion-side-3 > .about-feature-main + .about-side-card + .about-side-card,
-.about-overview-layout:has(> .about-feature-main + .about-side-card + .about-side-card:focus-within) > .about-feature-main + .about-side-card + .about-side-card {
+.about-overview-layout.is-accordion-side-3 > .about-feature-main + .about-side-card + .about-side-card {
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 0%;
@@ -1639,16 +1686,12 @@ vertical-align: middle;
 }
 
 .about-overview-layout.is-accordion-side-2 .about-feature-main-rich,
-.about-overview-layout:has(> .about-feature-main + .about-side-card:focus-within) .about-feature-main-rich,
-.about-overview-layout.is-accordion-side-3 .about-feature-main-rich,
-.about-overview-layout:has(> .about-feature-main + .about-side-card + .about-side-card:focus-within) .about-feature-main-rich {
+.about-overview-layout.is-accordion-side-3 .about-feature-main-rich {
   display: none;
 }
 
 .about-overview-layout.is-accordion-side-2 .about-feature-main-slim,
-.about-overview-layout:has(> .about-feature-main + .about-side-card:focus-within) .about-feature-main-slim,
-.about-overview-layout.is-accordion-side-3 .about-feature-main-slim,
-.about-overview-layout:has(> .about-feature-main + .about-side-card + .about-side-card:focus-within) .about-feature-main-slim {
+.about-overview-layout.is-accordion-side-3 .about-feature-main-slim {
   display: flex;
 }
 
@@ -1675,23 +1718,19 @@ vertical-align: middle;
   min-height: 0;
 }
 
-.about-overview-layout.is-accordion-side-2 .about-feature-main + .about-side-card .about-side-card-rich,
-.about-overview-layout:has(> .about-feature-main + .about-side-card:focus-within) .about-feature-main + .about-side-card .about-side-card-rich {
+.about-overview-layout.is-accordion-side-2 .about-feature-main + .about-side-card .about-side-card-rich {
   display: flex;
 }
 
-.about-overview-layout.is-accordion-side-2 .about-feature-main + .about-side-card .about-side-card-slim,
-.about-overview-layout:has(> .about-feature-main + .about-side-card:focus-within) .about-feature-main + .about-side-card .about-side-card-slim {
+.about-overview-layout.is-accordion-side-2 .about-feature-main + .about-side-card .about-side-card-slim {
   display: none;
 }
 
-.about-overview-layout.is-accordion-side-3 .about-feature-main + .about-side-card + .about-side-card .about-side-card-rich,
-.about-overview-layout:has(> .about-feature-main + .about-side-card + .about-side-card:focus-within) .about-feature-main + .about-side-card + .about-side-card .about-side-card-rich {
+.about-overview-layout.is-accordion-side-3 .about-feature-main + .about-side-card + .about-side-card .about-side-card-rich {
   display: flex;
 }
 
-.about-overview-layout.is-accordion-side-3 .about-feature-main + .about-side-card + .about-side-card .about-side-card-slim,
-.about-overview-layout:has(> .about-feature-main + .about-side-card + .about-side-card:focus-within) .about-feature-main + .about-side-card + .about-side-card .about-side-card-slim {
+.about-overview-layout.is-accordion-side-3 .about-feature-main + .about-side-card + .about-side-card .about-side-card-slim {
   display: none;
 }
 
