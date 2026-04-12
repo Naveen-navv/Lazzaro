@@ -82,6 +82,64 @@ if (heroWrapper) {
   });
 }
 
+const featureSection = document.querySelector('.feature-section');
+if (featureSection) {
+  const featureCards = Array.from(featureSection.querySelectorAll('.feature-card'));
+  const featurePrev = featureSection.querySelector('.feature-nav-prev');
+  const featureNext = featureSection.querySelector('.feature-nav-next');
+  const summaryIndexEl = featureSection.querySelector('.summary-index');
+  const summaryHeadingEl = featureSection.querySelector('.feature-summary h3');
+  const summaryBodyEl = featureSection.querySelector('.summary-text-body');
+
+  function formatFeatureIndex(i) {
+    return '(' + String(i + 1).padStart(2, '0') + ')';
+  }
+
+  let featureSlideIndex = Math.max(
+    0,
+    featureCards.findIndex((card) => card.classList.contains('active'))
+  );
+
+  function syncFeatureNavButtons() {
+    const last = featureCards.length - 1;
+    if (featurePrev) {
+      featurePrev.disabled = last < 1 || featureSlideIndex === 0;
+    }
+    if (featureNext) {
+      featureNext.disabled = last < 1 || featureSlideIndex === last;
+    }
+  }
+
+  function setFeatureSlide(index) {
+    if (!featureCards.length) return;
+    const last = featureCards.length - 1;
+    featureSlideIndex = Math.max(0, Math.min(last, index));
+    const active = featureCards[featureSlideIndex];
+    featureCards.forEach((card, i) => {
+      card.classList.toggle('active', i === featureSlideIndex);
+    });
+    if (summaryIndexEl) summaryIndexEl.textContent = formatFeatureIndex(featureSlideIndex);
+    if (summaryHeadingEl) summaryHeadingEl.textContent = active.dataset.featureHeading || '';
+    if (summaryBodyEl) summaryBodyEl.textContent = active.dataset.featureSummary || '';
+    syncFeatureNavButtons();
+  }
+
+  featurePrev?.addEventListener('click', () => {
+    setFeatureSlide(featureSlideIndex - 1);
+  });
+  featureNext?.addEventListener('click', () => {
+    setFeatureSlide(featureSlideIndex + 1);
+  });
+
+  featureCards.forEach((card, i) => {
+    card.addEventListener('click', () => {
+      setFeatureSlide(i);
+    });
+  });
+
+  setFeatureSlide(featureSlideIndex);
+}
+
 const faqItems = Array.from(document.querySelectorAll('.faq-item'));
 faqItems.forEach((item) => {
   const trigger = item.querySelector('.faq-trigger');
@@ -167,8 +225,9 @@ if (checkoutBillingForm && checkoutBillingModeRadios.length) {
 const aboutAccordionLayout = document.querySelector('.about-overview-layout');
 if (aboutAccordionLayout) {
   const aboutMain = aboutAccordionLayout.querySelector(':scope > .about-feature-main');
-  const aboutSide2 = aboutAccordionLayout.querySelector(':scope > article:nth-child(2)');
-  const aboutSide3 = aboutAccordionLayout.querySelector(':scope > article:nth-child(3)');
+  const aboutSideCards = Array.from(aboutAccordionLayout.querySelectorAll(':scope > .about-side-card'));
+  const aboutSide2 = aboutSideCards[0];
+  const aboutSide3 = aboutSideCards[1];
   const CLS_2 = 'is-accordion-side-2';
   const CLS_3 = 'is-accordion-side-3';
   const leaveDelayMs = 260;
@@ -252,16 +311,28 @@ if (aboutAccordionLayout) {
 
 const accountNavButtons = Array.from(document.querySelectorAll('.account-nav-btn'));
 const accountPanels = Array.from(document.querySelectorAll('.account-panel'));
+const accountPageMain = document.querySelector('main.account-page.shell');
+
+function syncAccountShellTabFromNav() {
+  if (!accountPageMain) return;
+  const active = accountNavButtons.find((b) => b.classList.contains('is-active') && b.dataset.accountTab);
+  if (active) accountPageMain.dataset.accountShellTab = active.dataset.accountTab;
+}
+
 accountNavButtons.forEach((button) => {
   button.addEventListener('click', () => {
     const target = button.dataset.accountTab;
+    if (!target) return;
     accountNavButtons.forEach((item) => item.classList.remove('is-active'));
     accountPanels.forEach((panel) => {
       panel.classList.toggle('is-active', panel.dataset.accountPanel === target);
     });
     button.classList.add('is-active');
+    if (accountPageMain) accountPageMain.dataset.accountShellTab = target;
   });
 });
+
+syncAccountShellTabFromNav();
 
 
 const addressForm = document.querySelector('#address-form');

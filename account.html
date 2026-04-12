@@ -29,7 +29,7 @@
       <div class="shell account-hero-grid"><div class="account-hero-copy"><h1>My Account</h1></div><div class="account-hero-visual"></div></div>
     </header>
 
-    <main class="account-page shell">
+    <main class="account-page shell" data-account-shell-tab="details">
       <section class="account-layout">
         <aside class="account-sidebar">
           <button class="account-nav-btn is-active" type="button" data-account-tab="details">Account Details</button>
@@ -42,10 +42,10 @@
             <h2>Account Details</h2>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
             <div class="account-form-grid two-col">
-              <label><span>Name*</span><input type="text" placeholder="Your Name" /></label>
-              <label><span>Last Name</span><input type="text" placeholder="Your Last Name" /></label>
-              <label><span>Email*</span><input type="email" placeholder="Your Email" /></label>
-              <label><span>Phone No*</span><input type="text" placeholder="Your Phone" /></label>
+              <label><input type="text" placeholder="Your Name" aria-label="Name (required)" /></label>
+              <label><input type="text" placeholder="Your Last Name" aria-label="Last Name" /></label>
+              <label><input type="email" placeholder="Your Email" aria-label="Email (required)" autocomplete="email" /></label>
+              <label><input type="text" placeholder="Your Phone" aria-label="Phone number (required)" autocomplete="tel" /></label>
             </div>
           </section>
 

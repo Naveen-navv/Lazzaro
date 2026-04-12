@@ -135,20 +135,32 @@
 
       <div class="feature-main">
         <h2 class="display-title">
-          Luxury,<br />
-          <span>No Compromise.</span>
+          Luxury, <span>No</span><br />
+          <span>Compromise.</span>
         </h2>
 
         <div class="feature-cards">
-          <article class="feature-card active">
+          <article
+            class="feature-card active"
+            data-feature-heading="High Quality, Fair Price"
+            data-feature-summary="We source ingredients from the same houses luxury brands special for you."
+          >
             <img src="./assets/product-rose.png" alt="Fresh Roses perfume arrangement" />
             <span>Fresh Roses</span>
           </article>
-          <article class="feature-card">
+          <article
+            class="feature-card"
+            data-feature-heading="Pure Botanical Craft"
+            data-feature-summary="Layered botanical extracts are distilled with care so each note opens cleanly on the skin."
+          >
             <img src="./assets/product-amber.png" alt="Natural extract perfume bottle" />
             <span>Natural Extract</span>
           </article>
-          <article class="feature-card">
+          <article
+            class="feature-card"
+            data-feature-heading="Build Your Lineup"
+            data-feature-summary="Mix airy florals, warm ambers, and crisp citruses—a wardrobe of moods for every season."
+          >
             <img src="./assets/product-ocean.png" alt="Various scents perfume bottle" />
             <span>Various Scents</span>
           </article>
@@ -159,8 +171,9 @@
         <h3>High Quality, Fair Price</h3>
         <div class="summary-copy">
           <p class="summary-text">
-            We source ingredients from the same houses luxury brands special for
-            you.
+            <span class="summary-text-body"
+              >We source ingredients from the same houses luxury brands special for you.</span
+            >
             <a href="#products" class="inline-action">
               materials
             </a>
@@ -491,8 +504,8 @@
           <h2 id="auth-title">Welcome Back</h2>
           <p>Sign in to your account to continue.</p>
           <form class="auth-form">
-            <label><span>Email-ID</span><input type="email" placeholder="Email-ID" /></label>
-            <label><span>Password</span><span class="auth-input-wrap"><input type="password" placeholder="Password" /><button class="password-toggle" type="button" aria-label="Show password"><svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" /><circle cx="12" cy="12" r="3" /></svg><svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3 21 21" /><path d="M10.6 10.7A3 3 0 0 0 13.3 13.4" /><path d="M9.9 5.1A12.5 12.5 0 0 1 12 5c6.5 0 10 7 10 7a17.6 17.6 0 0 1-4.2 4.8" /><path d="M6.7 6.7A17.1 17.1 0 0 0 2 12s3.5 7 10 7a11.9 11.9 0 0 0 4-.7" /></svg></button></span></label>
+            <label><input type="email" placeholder="Email-ID" aria-label="Email-ID" autocomplete="email" /></label>
+            <label><span class="auth-input-wrap"><input type="password" placeholder="Password" aria-label="Password" autocomplete="current-password" /><button class="password-toggle" type="button" aria-label="Show password"><svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" /><circle cx="12" cy="12" r="3" /></svg><svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3 21 21" /><path d="M10.6 10.7A3 3 0 0 0 13.3 13.4" /><path d="M9.9 5.1A12.5 12.5 0 0 1 12 5c6.5 0 10 7 10 7a17.6 17.6 0 0 1-4.2 4.8" /><path d="M6.7 6.7A17.1 17.1 0 0 0 2 12s3.5 7 10 7a11.9 11.9 0 0 0 4-.7" /></svg></button></span></label>
             <a href="#" class="auth-inline-link auth-align-right" data-auth-switch="forgot">Forgot Password?</a>
             <button class="auth-submit" type="button">Sign In <span>&rarr;</span></button>
           </form>
@@ -503,13 +516,13 @@
           <h2>Create Your Account</h2>
           <form class="auth-form auth-form-signup">
             <div class="auth-grid-two">
-              <label><span>First Name*</span><input type="text" placeholder="First Name" /></label>
-              <label><span>Last Name</span><input type="text" placeholder="Last Name" /></label>
+              <label><input type="text" placeholder="First Name" aria-label="First Name (required)" autocomplete="given-name" /></label>
+              <label><input type="text" placeholder="Last Name" aria-label="Last Name" autocomplete="family-name" /></label>
             </div>
-            <label><span>Email-ID*</span><input type="email" placeholder="Email-ID" /></label>
-            <label><span>Mobile Number*</span><input type="text" placeholder="Mobile Number" /></label>
-            <label><span>Password*</span><span class="auth-input-wrap"><input type="password" placeholder="Password" /><button class="password-toggle" type="button" aria-label="Show password"><svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" /><circle cx="12" cy="12" r="3" /></svg><svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3 21 21" /><path d="M10.6 10.7A3 3 0 0 0 13.3 13.4" /><path d="M9.9 5.1A12.5 12.5 0 0 1 12 5c6.5 0 10 7 10 7a17.6 17.6 0 0 1-4.2 4.8" /><path d="M6.7 6.7A17.1 17.1 0 0 0 2 12s3.5 7 10 7a11.9 11.9 0 0 0 4-.7" /></svg></button></span></label>
-            <label><span>Confirm Password*</span><span class="auth-input-wrap"><input type="password" placeholder="Confirm Password" /><button class="password-toggle" type="button" aria-label="Show password"><svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" /><circle cx="12" cy="12" r="3" /></svg><svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3 21 21" /><path d="M10.6 10.7A3 3 0 0 0 13.3 13.4" /><path d="M9.9 5.1A12.5 12.5 0 0 1 12 5c6.5 0 10 7 10 7a17.6 17.6 0 0 1-4.2 4.8" /><path d="M6.7 6.7A17.1 17.1 0 0 0 2 12s3.5 7 10 7a11.9 11.9 0 0 0 4-.7" /></svg></button></span></label>
+            <label><input type="email" placeholder="Email-ID" aria-label="Email-ID (required)" autocomplete="email" /></label>
+            <label><input type="text" placeholder="Mobile Number" aria-label="Mobile Number (required)" autocomplete="tel" /></label>
+            <label><span class="auth-input-wrap"><input type="password" placeholder="Password" aria-label="Password (required)" autocomplete="new-password" /><button class="password-toggle" type="button" aria-label="Show password"><svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" /><circle cx="12" cy="12" r="3" /></svg><svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3 21 21" /><path d="M10.6 10.7A3 3 0 0 0 13.3 13.4" /><path d="M9.9 5.1A12.5 12.5 0 0 1 12 5c6.5 0 10 7 10 7a17.6 17.6 0 0 1-4.2 4.8" /><path d="M6.7 6.7A17.1 17.1 0 0 0 2 12s3.5 7 10 7a11.9 11.9 0 0 0 4-.7" /></svg></button></span></label>
+            <label><span class="auth-input-wrap"><input type="password" placeholder="Confirm Password" aria-label="Confirm Password (required)" autocomplete="new-password" /><button class="password-toggle" type="button" aria-label="Show password"><svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" /><circle cx="12" cy="12" r="3" /></svg><svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3 21 21" /><path d="M10.6 10.7A3 3 0 0 0 13.3 13.4" /><path d="M9.9 5.1A12.5 12.5 0 0 1 12 5c6.5 0 10 7 10 7a17.6 17.6 0 0 1-4.2 4.8" /><path d="M6.7 6.7A17.1 17.1 0 0 0 2 12s3.5 7 10 7a11.9 11.9 0 0 0 4-.7" /></svg></button></span></label>
             <button class="auth-submit" type="button">Sign Up <span>&rarr;</span></button>
           </form>
           <p class="auth-footer-copy">Already have an account? <a href="#" data-auth-switch="signin">Sign IN</a></p>
@@ -519,7 +532,7 @@
           <h2>Forgot Your Password?</h2>
           <p>No worries! Enter your email address and we'll send you a link to reset your password.</p>
           <form class="auth-form">
-            <label><span>Email-ID</span><input type="email" placeholder="Email-ID" /></label>
+            <label><input type="email" placeholder="Email-ID" aria-label="Email-ID" autocomplete="email" /></label>
             <button class="auth-submit" type="button">Send Reset Link <span>&rarr;</span></button>
           </form>
           <p class="auth-footer-copy"><a href="#" data-auth-switch="signin">Back to Sign IN</a></p>

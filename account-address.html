@@ -29,7 +29,7 @@
       <div class="shell account-hero-grid"><div class="account-hero-copy"><h1>My Account</h1></div><div class="account-hero-visual"></div></div>
     </header>
 
-    <main class="account-page shell">
+    <main class="account-page shell" data-account-shell-tab="address">
       <section class="account-layout">
         <aside class="account-sidebar">
           <a class="account-nav-btn" href="./account.html">Account Details</a>
@@ -43,15 +43,15 @@
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
             <div class="address-form-wrap address-form-page">
               <div class="account-form-grid two-col">
-                <label><span>Name*</span><input type="text" placeholder="Your Name" /></label>
-                <label><span>Mobile Number*</span><input type="text" placeholder="Your Name" /></label>
-                <label><span>Address Line 2</span><input type="text" placeholder="Your Address Line 2" /></label>
-                <label><span>Address Line 1</span><input type="text" placeholder="Your Address Line 1" /></label>
+                <label><input type="text" placeholder="Your Name" aria-label="Name (required)" /></label>
+                <label><input type="text" placeholder="Your Mobile Number" aria-label="Mobile Number (required)" autocomplete="tel" /></label>
+                <label><input type="text" placeholder="Your Address Line 2" aria-label="Address Line 2" /></label>
+                <label><input type="text" placeholder="Your Address Line 1" aria-label="Address Line 1" /></label>
               </div>
               <div class="account-form-grid three-col">
-                <label><span>City</span><input type="text" placeholder="Your City" /></label>
-                <label><span>Postal Code</span><input type="text" placeholder="Your Postal Code" /></label>
-                <label><span>State</span>
+                <label><input type="text" placeholder="Your City" aria-label="City" /></label>
+                <label><input type="text" placeholder="Your Postal Code" aria-label="Postal Code" /></label>
+                <label>
                   <select id="addr-state" name="state" aria-label="State">
                     <option value="Tamil Nadu" selected>Tamil Nadu</option>
                     <option value="Andhra Pradesh">Andhra Pradesh</option>
