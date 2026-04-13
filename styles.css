@@ -854,7 +854,6 @@ letter-spacing: 0%;
 
 .button-light,
 .button-dark {
-  min-height: 52px;
   padding: 0.85rem 1.2rem;
   border-radius: 999px;
   border: none;
@@ -1465,16 +1464,22 @@ vertical-align: middle;
 }
 
 .about-hero-grid {
-  position: relative;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
   z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(280px, 420px);
-  align-items: center;
-  min-height: 72svh;
-  padding-top: 118px;
+  width: var(--shell);
+  margin: 0;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .about-hero-copy {
+  max-width: 420px;
   padding-bottom: 0;
 }
 
@@ -1935,6 +1940,11 @@ vertical-align: middle;
 }
 
 .faq-section.shell {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: max(0px, calc((100% - var(--shell)) / 2));
+  box-sizing: border-box;
   background-color: #fff;
 }
 
@@ -2064,12 +2074,19 @@ vertical-align: middle;
 @media (max-width: 780px) {
   .about-hero {
     min-height: auto;
+    padding-top: 7rem;
     padding-bottom: 2rem;
   }
 
   .about-hero-grid {
-    min-height: auto;
-    padding-top: 7rem;
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    width: auto;
+    margin: 0 auto;
+    transform: none;
+    justify-content: flex-start;
   }
 
   .about-hero-copy {
@@ -3166,7 +3183,10 @@ main.account-page.shell[data-account-shell-tab="details"] {
 }
 
 .auth-modal.is-open {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
 }
 
 .auth-backdrop {
@@ -3181,7 +3201,8 @@ main.account-page.shell[data-account-shell-tab="details"] {
   z-index: 1;
   width: min(980px, calc(100vw - 140px));
   max-height: min(680px, calc(100vh - 72px));
-  margin: 36px auto;
+  margin: 0;
+  flex-shrink: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   background: rgba(255, 251, 245, 0.98);
@@ -3236,6 +3257,9 @@ main.account-page.shell[data-account-shell-tab="details"] {
 
 .auth-panel {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   min-height: 0;
   padding: 2rem 2rem 1.4rem;
   overflow: hidden;
@@ -3276,7 +3300,7 @@ main.account-page.shell[data-account-shell-tab="details"] {
   letter-spacing: -0.04em;
 }
 
-.auth-view>p {
+.auth-view > p:not(.auth-footer-copy) {
   margin: 1.2rem 0 0;
   max-width: 42rem;
   color: #2a2a2a;
@@ -3355,6 +3379,43 @@ main.account-page.shell[data-account-shell-tab="details"] {
   text-decoration: underline;
 }
 
+.auth-footer-copy a.auth-back-to-signin {
+  text-decoration: none;
+  color: #6b6b6b;
+}
+
+.auth-footer-copy a.auth-back-to-signin .auth-back-prefix {
+  text-decoration: none;
+}
+
+.auth-footer-copy a.auth-back-to-signin .auth-back-em {
+  color: #111;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.auth-view[data-auth-view="forgot"] h2 {
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  letter-spacing: -0.04em;
+}
+
+.auth-view[data-auth-view="forgot"] .auth-footer-copy--back {
+  font-size: 0.8rem;
+}
+
+.auth-view[data-auth-view="forgot"] > p:not(.auth-footer-copy) {
+  margin-top: 1.65rem;
+}
+
+.auth-view[data-auth-view="forgot"] .auth-form {
+  margin-top: 2rem;
+  gap: 1.35rem;
+}
+
+.auth-view[data-auth-view="forgot"] .auth-footer-copy {
+  margin-top: 1.75rem;
+}
+
 .auth-align-right {
   justify-self: end;
 }
@@ -3386,13 +3447,21 @@ main.account-page.shell[data-account-shell-tab="details"] {
   font-size: calc(1.05rem - 3px);
 }
 
+.auth-panel .auth-view p.auth-footer-copy {
+  color: #6b6b6b;
+}
+
+.auth-footer-copy .auth-footer-lead {
+  color: #6b6b6b;
+}
+
 .auth-form-signup {
-  gap: 0.75rem;
-  margin-top: 1rem;
+  gap: 1.05rem;
+  margin-top: 1.75rem;
 }
 
 .auth-form-signup .auth-grid-two {
-  gap: 0.75rem;
+  gap: 1.05rem;
 }
 
 .auth-form-signup label {
@@ -3411,15 +3480,15 @@ main.account-page.shell[data-account-shell-tab="details"] {
 .auth-form-signup .auth-submit {
   min-height: 42px;
   font-size: 0.9rem;
-  margin-top: 0.2rem;
+  margin-top: 0.55rem;
 }
 
 .auth-view[data-auth-view="signup"] h2 {
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-size: clamp(1.45rem, 2.55vw, 2.25rem);
 }
 
 .auth-view[data-auth-view="signup"] .auth-footer-copy {
-  margin-top: 0.9rem;
+  margin-top: 1.5rem;
   font-size: 0.9rem;
 }
 
