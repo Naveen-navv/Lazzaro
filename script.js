@@ -72,6 +72,41 @@ if (showcaseSlider && showcaseWrapper) {
   restartShowcase();
 }
 
+(function initShowcaseParallax() {
+  const wrap = document.querySelector('#showcase-wrapper');
+  if (!wrap) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function updateShowcaseParallax() {
+    if (reduceMotion.matches) {
+      wrap.style.setProperty('--showcase-parallax-y', '0px');
+      return;
+    }
+    const rect = wrap.getBoundingClientRect();
+    const vh = window.innerHeight || 1;
+    const sectionMid = rect.top + rect.height / 2;
+    const viewportMid = vh / 2;
+    const offset = (sectionMid - viewportMid) * -0.42;
+    wrap.style.setProperty('--showcase-parallax-y', `${offset}px`);
+  }
+
+  let ticking = false;
+  function onScrollOrResize() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(() => {
+      updateShowcaseParallax();
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('scroll', onScrollOrResize, { passive: true });
+  window.addEventListener('resize', onScrollOrResize);
+  reduceMotion.addEventListener('change', updateShowcaseParallax);
+  updateShowcaseParallax();
+})();
+
 const heroWrapper = document.querySelector('.hero-slider');
 if (heroWrapper) {
   heroWrapper.addEventListener('click', (e) => {
