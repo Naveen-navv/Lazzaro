@@ -7,8 +7,27 @@ if (navToggle && navMenu) {
     navToggle.setAttribute('aria-expanded', String(isOpen));
   });
 
+  const mobileDropdownItems = Array.from(navMenu.querySelectorAll('.nav-item.has-dropdown'));
+  mobileDropdownItems.forEach((item) => {
+    const trigger = item.querySelector('.nav-link-dropdown');
+    if (!trigger) return;
+    trigger.addEventListener('click', (event) => {
+      if (!window.matchMedia('(max-width: 780px)').matches) return;
+      event.preventDefault();
+      const willOpen = !item.classList.contains('is-open');
+      mobileDropdownItems.forEach((dropdownItem) => dropdownItem.classList.remove('is-open'));
+      item.classList.toggle('is-open', willOpen);
+    });
+  });
+
   navMenu.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
+    link.addEventListener('click', (event) => {
+      const isMobileDropdownTrigger =
+        window.matchMedia('(max-width: 780px)').matches && event.currentTarget?.classList.contains('nav-link-dropdown');
+      if (isMobileDropdownTrigger) {
+        return;
+      }
+      mobileDropdownItems.forEach((dropdownItem) => dropdownItem.classList.remove('is-open'));
       navMenu.classList.remove('is-open');
       navToggle.setAttribute('aria-expanded', 'false');
     });
