@@ -1,75 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<?php
+$pageTitle = "Lazzaro Laurels";
+$pageDescription = "Lazzaro Laurels perfume landing page featuring premium fragrances, collections, and best-selling scents.";
+$bodyClass = "home-page";
+$navContext = "home";
+$navActive = "home";
+$footerContext = "home";
+require __DIR__ . '/includes/head.php';
+?>
+<header class="hero" id="home">
+<?php require __DIR__ . '/includes/header.php'; ?>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lazzaro Laurels</title>
-  <meta name="description"
-    content="Lazzaro Laurels perfume landing page featuring premium fragrances, collections, and best-selling scents." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500;1,600&family=Outfit:wght@300;400;500;600&family=Urbanist:wght@300;400;500;600&display=swap"
-    rel="stylesheet" />
-
-  <link rel="stylesheet" href="./styles.css" />
-</head>
-
-<body class="home-page">
-  <header class="hero" id="home">
-    <nav class="nav shell">
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu"
-        aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-      </button>
-
-      <a class="brand" href="#home" aria-label="Lazzaro home">
-        <span class="brand-main">LAZZARO</span>
-        <span class="brand-sub">LAURELS</span>
-      </a>
-
-      <div class="nav-menu" id="nav-menu">
-        <div class="nav-links">
-          <a class="nav-link is-active" href="#home">HOME</a>
-          <a class="nav-link" href="./about.html">ABOUT US</a>
-          <div class="nav-item has-dropdown">
-            <a class="nav-link nav-link-dropdown" href="./products.html">
-              PRODUCT
-              <span class="nav-caret" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="m7 10 5 5 5-5" />
-                </svg>
-              </span>
-            </a>
-            <div class="nav-dropdown">
-              <a href="./products.html?category=him">FOR HIM</a>
-              <a href="./products.html?category=her">FOR HER</a>
-              <a href="./products.html?category=unisex">UNISEX</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="nav-icons" aria-label="Shopping and account">
-          <a href="./cart.html" class="icon-button" aria-label="Cart">
-            <span class="badge" data-count="0"></span>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 7h13l-1.3 7.6a2 2 0 0 1-2 1.7H9a2 2 0 0 1-2-1.7L5.2 4.8A1 1 0 0 0 4.2 4H3" />
-              <path d="M9 20a1 1 0 1 0 0 .01M16 20a1 1 0 1 0 0 .01" />
-            </svg>
-          </a>
-          <a href="./account.html" class="icon-button" aria-label="Account" data-open-auth>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" />
-              <path d="M5 20a7 7 0 0 1 14 0" />
-            </svg>
-          </a>
-        </div>
-      </div>
-    </nav>
-
-    <div class="hero-slider">
+<div class="hero-slider">
       <article class="hero-slide hero-slide-product is-active" data-accent="dark">
         <div class="shell hero-grid hero-grid-single">
           <div class="hero-copy">
@@ -116,9 +57,10 @@
       </article>
 
     </div>
-  </header>
 
-  <main>
+</header>
+
+<main>
     <section class="feature-section shell scroll-reveal" id="about">
       <div class="feature-intro">
         <div class="mini-gallery">
@@ -224,7 +166,7 @@
                 <path d="M9 20a1 1 0 1 0 0 .01M16 20a1 1 0 1 0 0 .01" />
               </svg>
             </button>
-            <a class="button-dark product-link" href="./product-detail.html">View Details</a>
+            <a class="button-dark product-link" href="./product-detail.php">View Details</a>
           </div>
         </article>
 
@@ -243,7 +185,7 @@
                 <path d="M9 20a1 1 0 1 0 0 .01M16 20a1 1 0 1 0 0 .01" />
               </svg>
             </button>
-            <a class="button-dark product-link" href="./product-detail.html">View Details</a>
+            <a class="button-dark product-link" href="./product-detail.php">View Details</a>
           </div>
         </article>
 
@@ -262,7 +204,7 @@
                 <path d="M9 20a1 1 0 1 0 0 .01M16 20a1 1 0 1 0 0 .01" />
               </svg>
             </button>
-            <a class="button-dark product-link" href="./product-detail.html">View Details</a>
+            <a class="button-dark product-link" href="./product-detail.php">View Details</a>
           </div>
         </article>
       </div>
@@ -368,7 +310,7 @@
                 <path d="M9 20a1 1 0 1 0 0 .01M16 20a1 1 0 1 0 0 .01" />
               </svg>
             </button>
-            <a class="button-dark product-link" href="./product-detail.html">View Details</a>
+            <a class="button-dark product-link" href="./product-detail.php">View Details</a>
           </div>
         </article>
 
@@ -387,7 +329,7 @@
                 <path d="M9 20a1 1 0 1 0 0 .01M16 20a1 1 0 1 0 0 .01" />
               </svg>
             </button>
-            <a class="button-dark product-link" href="./product-detail.html">View Details</a>
+            <a class="button-dark product-link" href="./product-detail.php">View Details</a>
           </div>
         </article>
 
@@ -406,7 +348,7 @@
                 <path d="M9 20a1 1 0 1 0 0 .01M16 20a1 1 0 1 0 0 .01" />
               </svg>
             </button>
-            <a class="button-dark product-link" href="./product-detail.html">View Details</a>
+            <a class="button-dark product-link" href="./product-detail.php">View Details</a>
           </div>
         </article>
       </div>
@@ -425,7 +367,7 @@
             <hr>
             <p>Everyday Elegance And Perfect For Your Body</p>
             <span>EDT | FRESH | 6HRS</span>
-            <a class="button-dark" href="./products.html">Explore Now</a>
+            <a class="button-dark" href="./products.php">Explore Now</a>
           </div>
         </article>
 
@@ -436,7 +378,7 @@
             <hr>
             <p>Everyday Elegance And Perfect For Your Body</p>
             <span>EDT | FRESH | 6HRS</span>
-            <a class="button-dark" href="./products.html">Explore Now</a>
+            <a class="button-dark" href="./products.php">Explore Now</a>
           </div>
         </article>
 
@@ -447,121 +389,12 @@
             <hr>
             <p>Everyday Elegance And Perfect For Your Body</p>
             <span>EDT | FRESH | 6HRS</span>
-            <a class="button-dark" href="./products.html">Explore Now</a>
+            <a class="button-dark" href="./products.php">Explore Now</a>
           </div>
         </article>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="shell footer-top">
-      <a class="brand brand-footer" href="#home" aria-label="Lazzaro home">
-        <span class="brand-main">LAZZARO</span>
-        <span class="brand-sub">LAURELS</span>
-      </a>
-
-      <div class="social-links" aria-label="Social links">
-        <a href="#" aria-label="Facebook"><img src="./assets/fb.png" alt="" width="24" height="24" decoding="async" /></a>
-        <a href="#" aria-label="Instagram"><img src="./assets/insta.png" alt="" width="24" height="24" decoding="async" /></a>
-        <a href="#" aria-label="Twitter"><img src="./assets/twitter.png" alt="" width="24" height="24" decoding="async" /></a>
-      </div>
-    </div>
-
-    <div class="shell footer-grid">
-      <div>
-        <h3>Shop</h3>
-        <a href="#">Women’s Collection</a>
-        <a href="#">Men’s Collection</a>
-        <a href="#">Unisex Collection</a>
-      </div>
-      <div>
-        <h3>Quicklink</h3>
-        <a href="#home">Home</a>
-        <a href="#about">About US</a>
-        <a href="./cart.html">Cart</a>
-      </div>
-      <div>
-        <h3>Contact</h3>
-        <a href="tel:+1234567890">+123-456-7890</a>
-        <a href="mailto:Info@Example.Com">Info@Example.Com</a>
-        <p>12 Anywhere St., Any City,<br />ST 12345</p>
-      </div>
-      <div class="footer-info">
-        <h3>Information</h3>
-        <p>
-          Discover fragrances that express who you are. From timeless classics
-          to modern blends, explore a curated collection of perfumes crafted to
-          leave a lasting impression.
-        </p>
-      </div>
-    </div>
-
-    <div class="shell footer-bottom">
-      <a href="#">Shipping &amp; Refund Policy</a>
-      <a href="#">Terms &amp; Conditions</a>
-      <a href="./privacy-policy.html">Privacy &amp; Policy</a>
-    </div>
-  </footer>
-
-
-  <div class="auth-modal" id="auth-modal" aria-hidden="true">
-    <div class="auth-backdrop" data-close-auth="true"></div>
-    <div class="auth-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-title">
-      <button class="auth-close" type="button" aria-label="Close authentication modal" data-close-auth="true">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M6 6 18 18" />
-          <path d="M18 6 6 18" />
-        </svg>
-      </button>
-      <div class="auth-visual">
-        <img src="./assets/auth-img.png" alt="Lazzaro authentication" />
-      </div>
-      <div class="auth-panel">
-        <section class="auth-view is-active" data-auth-view="signin">
-          <h2 id="auth-title">Welcome Back</h2>
-          <p>Sign in to your account to continue.</p>
-          <form class="auth-form">
-            <label><input type="email" placeholder="Email-ID" aria-label="Email-ID" autocomplete="email" /></label>
-            <label><span class="auth-input-wrap"><input type="password" placeholder="Password" aria-label="Password" autocomplete="current-password" /><button class="password-toggle" type="button" aria-label="Show password"><svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" /><circle cx="12" cy="12" r="3" /></svg><svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3 21 21" /><path d="M10.6 10.7A3 3 0 0 0 13.3 13.4" /><path d="M9.9 5.1A12.5 12.5 0 0 1 12 5c6.5 0 10 7 10 7a17.6 17.6 0 0 1-4.2 4.8" /><path d="M6.7 6.7A17.1 17.1 0 0 0 2 12s3.5 7 10 7a11.9 11.9 0 0 0 4-.7" /></svg></button></span></label>
-            <a href="#" class="auth-inline-link auth-align-right" data-auth-switch="forgot">Forgot Password?</a>
-            <button class="auth-submit" type="button">Sign In <span>&rarr;</span></button>
-          </form>
-          <p class="auth-footer-copy"><span class="auth-footer-lead">Don't have an account? </span><a href="#" data-auth-switch="signup">Sign up</a></p>
-        </section>
-
-        <section class="auth-view" data-auth-view="signup">
-          <h2>Create Your Account</h2>
-          <form class="auth-form auth-form-signup">
-            <div class="auth-grid-two">
-              <label><input type="text" placeholder="First Name" aria-label="First Name (required)" autocomplete="given-name" /></label>
-              <label><input type="text" placeholder="Last Name" aria-label="Last Name" autocomplete="family-name" /></label>
-            </div>
-            <label><input type="email" placeholder="Email-ID" aria-label="Email-ID (required)" autocomplete="email" /></label>
-            <label><input type="text" placeholder="Mobile Number" aria-label="Mobile Number (required)" autocomplete="tel" /></label>
-            <label><span class="auth-input-wrap"><input type="password" placeholder="Password" aria-label="Password (required)" autocomplete="new-password" /><button class="password-toggle" type="button" aria-label="Show password"><svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" /><circle cx="12" cy="12" r="3" /></svg><svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3 21 21" /><path d="M10.6 10.7A3 3 0 0 0 13.3 13.4" /><path d="M9.9 5.1A12.5 12.5 0 0 1 12 5c6.5 0 10 7 10 7a17.6 17.6 0 0 1-4.2 4.8" /><path d="M6.7 6.7A17.1 17.1 0 0 0 2 12s3.5 7 10 7a11.9 11.9 0 0 0 4-.7" /></svg></button></span></label>
-            <label><span class="auth-input-wrap"><input type="password" placeholder="Confirm Password" aria-label="Confirm Password (required)" autocomplete="new-password" /><button class="password-toggle" type="button" aria-label="Show password"><svg class="icon-eye" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" /><circle cx="12" cy="12" r="3" /></svg><svg class="icon-eye-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3 21 21" /><path d="M10.6 10.7A3 3 0 0 0 13.3 13.4" /><path d="M9.9 5.1A12.5 12.5 0 0 1 12 5c6.5 0 10 7 10 7a17.6 17.6 0 0 1-4.2 4.8" /><path d="M6.7 6.7A17.1 17.1 0 0 0 2 12s3.5 7 10 7a11.9 11.9 0 0 0 4-.7" /></svg></button></span></label>
-            <button class="auth-submit" type="button">Sign Up <span>&rarr;</span></button>
-          </form>
-          <p class="auth-footer-copy"><span class="auth-footer-lead">Already have an account? </span><a href="#" data-auth-switch="signin">Sign in</a></p>
-        </section>
-
-        <section class="auth-view" data-auth-view="forgot">
-          <h2>Forgot Your Password?</h2>
-          <p>No worries! Enter your email address and we'll send you a link to reset your password.</p>
-          <form class="auth-form">
-            <label><input type="email" placeholder="Email-ID" aria-label="Email-ID" autocomplete="email" /></label>
-            <button class="auth-submit" type="button">Send Reset Link <span>&rarr;</span></button>
-          </form>
-          <p class="auth-footer-copy auth-footer-copy--back">
-            <a href="#" class="auth-back-to-signin" data-auth-switch="signin"><span class="auth-back-prefix">Back to </span><span class="auth-back-em">sign in</span></a>
-          </p>
-        </section>
-      </div>
-    </div>
-  </div>
-
-  <script src="./script.js"></script>
-</body>
-
-</html>
+<?php require __DIR__ . '/includes/footer.php'; ?>
+<?php require __DIR__ . '/includes/foot.php'; ?>
