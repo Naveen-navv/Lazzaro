@@ -1312,6 +1312,7 @@ vertical-align: middle;
   .nav {
     padding-top: 18px;
     align-items: flex-start;
+    gap: 0.65rem;
   }
 
   .nav-toggle {

@@ -604,10 +604,6 @@ function closeAuthModal() {
 }
 
 if (authModal) {
-  if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '') {
-    openAuthModal('signin');
-  }
-
   authOpenTriggers.forEach((trigger) => {
     trigger.addEventListener('click', (event) => {
       event.preventDefault();
